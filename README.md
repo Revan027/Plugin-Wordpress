@@ -1,4 +1,4 @@
-# Plugin-Wordpress (coming soon...)
+# Plugin-Wordpress
 A personal plugin Wordpress, developping for a friend's blog. That allows him to view and insert Trail's informations on a France's map.
 
 ## Languages
