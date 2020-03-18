@@ -1,0 +1,173 @@
+.mapFrance{
+      width: 100%;
+     opacity: 0.7;
+}
+map{
+      display: block;
+}
+.areaMap:hover , area:focus {
+     cursor: pointer;
+     transform: scale(2);
+}
+.blockImage{
+      position: relative;
+}
+.runner{
+      position:absolute;
+      width: 80px;
+      cursor: pointer;
+}
+
+#country{
+      color: #1976d6;
+      margin: 20px 0;
+      flex-grow: 2;
+      align-self: center;
+       font-size: 24px;
+}
+
+.custom-entry-content{
+      position: relative;
+}
+.custom-entry-content ul{
+      margin:0!important;
+  }
+  
+.custom-entry-content ul > li {
+    background-image: none!important;
+    padding:0!important;
+    margin:0!important;
+}
+
+
+/*********************************modal*************************************************/
+.modalplugin {
+      position: absolute;
+      z-index: 9998;
+      background-color: #efefef;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 8px black;
+      width: 98%;
+      min-height: 500px;
+      justify-content: space-between;
+}
+.mainSlideTrail,.testForm{
+      display: none;
+      background-color: rgba(0,0,0,.03);
+      border: 1px solid rgba(0,0,0,.125);
+      padding: 20px;
+      flex-grow: 10;
+}
+
+.info_trail{
+      display: flex;
+      padding: 0 10px;
+}
+
+.date_trail{
+
+      text-align: left;
+      color:#8e7914;
+      margin-right: 30px;
+}
+
+.distance_trail{
+      text-align: right;
+      color: #3b8044;
+}
+
+.modalplugin .close{
+      align-self: flex-end;
+}
+
+.testFom-submit{
+      display: flex;
+      justify-content: center;
+}
+
+.alert {
+      z-index: 9999;
+      position: fixed!important;
+      padding: .75rem 1.25rem;
+      border: 1px solid transparent;
+      border-radius: .25rem;
+      bottom: -50%;
+      left: 40%;
+      opacity: 0;
+      box-shadow: 0 0 8px black;
+      z-index: 9;
+  }
+
+.listTrailPicture{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+}
+
+.listTrailPicture img{
+      width: 100px;
+      height: 90px;
+      opacity: 0.5;
+      border: 1px solid #3a3737;
+      background-color: #d4b38b;
+    
+}
+
+.listTrailPicture img:hover{
+     cursor: pointer;
+     
+ }
+
+.slideTrail{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 300px;
+}
+
+.slideTrail img {
+      width: 50%;
+      box-shadow: 2px 2px 10px black;
+}
+
+.infoSlide{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+}
+.navSlide{
+      font-size: 25px;
+      cursor: pointer;
+}
+
+.custom-close{
+      position: absolute;
+      top: 0;
+      right: 5px;
+}
+
+.custom-nav{
+      padding: 5px;
+      background-color: rgba(0,0,0,.03);
+      border: 1px solid rgba(0,0,0,.125);
+      justify-content: center;
+}
+
+.popover-body {
+      color: #212529;
+      text-align: center;
+      font-size: 25px;
+}
+
+.trash_trail {
+      flex-grow: 1;
+      text-align: right;
+      cursor: pointer;
+}
+@media (max-width: 768px) {
+	
+}
+/*afficher nombre course par region au passage souris sur region avec une bulle qui suis le curseur*/
