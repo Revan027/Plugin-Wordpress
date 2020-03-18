@@ -15,25 +15,22 @@
                         </button>
 
                         <ul class="nav custom-nav">
+                              <?PHP   
+                                    if($user->roles[0] =="administrator" && is_admin()){ 
+                              ?> 
+
                               <li class="nav-item">
                                     <a class="nav-link" id="liste"><button type="button" class="btn btn-info">Consulter les courses</button></a>
                               </li>
-
-                              <?PHP   
-                                    if($user->roles[0] =="administrator" && is_admin()){ 
-                                    ?>   
-                                          <li class="nav-item">
-                                                <a class="nav-link active" id="formulaire"><button type="button" class="btn btn-info">Ajouter une course</button></a>
-                                          </li> 
-                                    <?PHP    
-                                    }                       
-                              ?>
-
-                             
-                        </ul>
-
-                        
                       
+                              <li class="nav-item">
+                                    <a class="nav-link active" id="formulaire"><button type="button" class="btn btn-info">Ajouter une course</button></a>
+                              </li> 
+
+                              <?PHP    
+                              }                       
+                              ?>                           
+                        </ul>
 
                         <span id="country">
                               <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
@@ -51,9 +48,15 @@
                                     <span></span>
                               </span>  
                               
-                              <span class="trash_trail">
-                                    <i class="fa fa-trash fa-2x trash_icon"></i>                
-                              </span>
+                              <?PHP   
+                              if($user->roles[0] =="administrator" && is_admin()){ 
+                              ?> 
+                                    <span class="trash_trail">
+                                          <i class="fa fa-trash fa-2x trash_icon"></i>                
+                                    </span>
+                              <?PHP   
+                              }
+                              ?>
                         </div>
                        
                         <?PHP   
