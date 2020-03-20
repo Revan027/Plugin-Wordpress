@@ -195,10 +195,9 @@ $(document).ready(function(){
       
             if(form.date == "" || form.date.search( /^([0-9]{4})\-([0]{1}[0-9]{1}|[1]{1}[0-2]{1})\-([0-2]{1}[0-9]{1}|[3]{1}[0-1]{1})$/g) != 0) {
                   erreur += "- Entrez une date valide <br/>" ;
-                  console.log(form.date.search( /^([0-9]{4})\-([0]{1}[0-9]{1}|[1]{1}[0-2]{1})\-([0-2]{1}[0-9]{1}|[3]{1}[0-1]{1})$/g));
             }
 
-            if(form.distance == "" || form.distance.search( /^[A-Z]*$/g) == 0){
+            if(form.distance == "" || form.distance.search( /^[A-Z]*$/g) == 0 || form.distance<=0){
                   erreur += "- Entrez une distance valide <br/>";
             }
 
