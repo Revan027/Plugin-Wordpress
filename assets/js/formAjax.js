@@ -38,7 +38,7 @@ $(document).ready(function(){
             let erreur = controlFormAddTrail(form);
 
             if(erreur === "" ){
-                  setTrail();
+                  setTrail(form);
             }
             else{
                   animateAlert("warning",erreur);               
