@@ -108,7 +108,7 @@ map{
 
 .listTrailPicture img{
       width: 100px;
-      height: 90px;
+      height: 90px!important;
       opacity: 0.5;
       border: 1px solid #3a3737;
       background-color: #d4b38b;
