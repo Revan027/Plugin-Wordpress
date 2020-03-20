@@ -42,7 +42,7 @@ function get_trail_region() {
 
 function get_trails_by_region() {
 
-      $region = $_POST['region'];
+      $region = $_GET['region'];
  
       $location = EntityPlugin::get_trails_by_region($region);
       echo json_encode($location);  
