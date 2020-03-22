@@ -41,31 +41,28 @@ class Carte_interactive
                   /******************************add action pour l'enregistrement des fichiers css et js du plugin et les ajoutes dans le header admin et du site*************************************/
 	
 				  
-				 add_action('wp_enqueue_scripts', 'admin_enqueue_scripts');    
-                  add_action('admin_enqueue_scripts', 'admin_enqueue_scripts');
+					add_action('wp_enqueue_scripts', 'admin_enqueue_scripts');    
+					add_action('admin_enqueue_scripts', 'admin_enqueue_scripts');
 				  
-				add_action('wp_enqueue_scripts', 'my_styles');    
-                  add_action('admin_enqueue_scripts', 'my_styles');
+				  
+					/******************************pour que wordpress reconnaisse le shortcode*************************************/
+					add_shortcode('liste_trail', array($this, 'pageAccueil'));
 
-                  /******************************pour que wordpress reconnaisse le shortcode*************************************/
-                  add_shortcode('liste_trail', array($this, 'pageAccueil'));
-
-				function admin_enqueue_scripts($hook){
-					echo $hook;
-					  //wp_register_script( 'lib2', plugins_url('carte-interactive/assets/js/node_modules/jquery/dist/jquery.min.js'),array(), false,false);
-					    wp_enqueue_script('lib2',plugins_url('carte-interactive/assets/js/node_modules/jquery/dist/jquery.min.js'), array('jquery'), "2.1");
-                        //wp_enqueue_script('lib2');
-				}	
-					
+		
                   /******************************enregistrement des fichiers css et js du plugin*************************************/
-                  function my_styles() {
+                  function admin_enqueue_scripts($hook) {
+			
+					if(strpos($hook,'carte-interactive') || strpos(get_the_permalink(),'carte-des-trails')){
                         wp_register_style( 'carte-interactive-css', plugins_url('carte-interactive/assets/css/map.css'));
                         wp_enqueue_style('carte-interactive-css');
 
                         wp_register_style( 'fontawesome', plugins_url('carte-interactive/assets/css/fontAwesome/css/font-awesome.css'));
                         wp_enqueue_style('fontawesome');
 
-                      
+						
+						wp_register_script( 'lib2', plugins_url('carte-interactive/assets/js/node_modules/jquery/dist/jquery.min.js'),array(), false,false);
+						wp_enqueue_script('lib2');
+							
 
                         wp_register_script( 'bootstrap-lib-js', plugins_url('carte-interactive/assets/js/node_modules/bootstrap/dist/js/bootstrap.min.js'));
                         wp_enqueue_script('bootstrap-lib-js'); 
@@ -91,6 +88,7 @@ class Carte_interactive
                         wp_enqueue_script('formAjax-js', array('jquery'), '1.0', true );  
 
                         wp_localize_script('formAjax-js', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
+					}
                   }
             }
       }
