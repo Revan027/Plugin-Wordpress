@@ -13,7 +13,7 @@ $(document).ready(function(){
             showModal : function() {
                   resetSlide();
                   if($( ".modalplugin" ).css("display") != "flex"){
-                  
+                        
                         $( ".modalplugin" ).fadeIn( "slow", function() {
                                    
                         });
@@ -85,9 +85,12 @@ function toggleModalMenu(lien){
       if( !$(".testForm").is(':animated') && !$(".mainSlideTrail").is(':animated') ) { 
 
             changeClass(lien);
-   
+          
+            $("#ajaxLoader").hide(500,()=>{
+                  $(".modalplugin").remove("#ajaxLoader"); 
+            }); 
             if(lien=="liste" && locations.length!=0){
-                
+                  
                   $(".testForm").fadeOut(400,()=>{
                         showPicture();
                         runSlide();
@@ -126,11 +129,10 @@ function handleSlide(element){
 /**
  * Animation du slide
 */
-function animationSlide(element){
-
+function animationSlide(element){ 
       $(".infoSlide").fadeOut(500,()=>{
-            runSlide();
-      }).fadeIn(500);     
+            runSlide(); 
+      }).fadeIn(500);    
 }
 
 
@@ -149,9 +151,11 @@ function resetSlide(){
  * Avancement du slide
 */
 function runSlide(){
+     
       showDistance();
       showDate();
       showImage();
+     
 }
 
 

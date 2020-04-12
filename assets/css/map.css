@@ -127,7 +127,7 @@ map{
       min-height: 300px;
 }
 
-.slideTrail img {
+.slideTrail img:not(#ajaxLoader) {
       width: 50%;
       box-shadow: 2px 2px 10px black;
 }
@@ -167,6 +167,10 @@ map{
       flex-grow: 1;
       text-align: right;
       cursor: pointer;
+}
+
+#ajaxLoader{
+      width: 80px;
 }
 @media (max-width: 768px) {
 	

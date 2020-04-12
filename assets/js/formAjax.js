@@ -146,11 +146,9 @@ $(document).ready(function(){
             $.ajax({
                   url:ajaxurl,
                   type: 'GET',
-                  data: {"action":'get_trails_by_region',"region":region},
-            
+                  data: {"action":'get_trails_by_region',"region":region},      
                   success: function(data) {
                         locations = JSON.parse(data);
-
                         toggleModalMenu("liste");                    
                   }
             });

@@ -39,56 +39,53 @@ class Carte_interactive
             
       
                   /******************************add action pour l'enregistrement des fichiers css et js du plugin et les ajoutes dans le header admin et du site*************************************/
-	
-				  
-					add_action('wp_enqueue_scripts', 'admin_enqueue_scripts');    
-					add_action('admin_enqueue_scripts', 'admin_enqueue_scripts');
-				  
-				  
-					/******************************pour que wordpress reconnaisse le shortcode*************************************/
-					add_shortcode('liste_trail', array($this, 'pageAccueil'));
+	              
+                  add_action('wp_enqueue_scripts', 'admin_enqueue_scripts',1);    
+                  add_action('admin_enqueue_scripts', 'admin_enqueue_scripts',1);
+                  
+                  
+                  /******************************pour que wordpress reconnaisse le shortcode*************************************/
+                  add_shortcode('liste_trail', array($this, 'pageAccueil'));
 
 		
                   /******************************enregistrement des fichiers css et js du plugin*************************************/
                   function admin_enqueue_scripts($hook) {
-			
-					if(strpos($hook,'carte-interactive') || strpos(get_the_permalink(),'carte-des-trails')){
-                        wp_register_style( 'carte-interactive-css', plugins_url('carte-interactive/assets/css/map.css'));
-                        wp_enqueue_style('carte-interactive-css');
+			             
+                        wp_register_script( 'lib2', plugins_url('carte-interactive/assets/js/node_modules/jquery/dist/jquery.min.js'),array(), false,false);
+                        wp_enqueue_script('lib2');
 
-                        wp_register_style( 'fontawesome', plugins_url('carte-interactive/assets/css/fontAwesome/css/font-awesome.css'));
-                        wp_enqueue_style('fontawesome');
+				if(strpos($hook,'carte-interactive') || strpos(get_the_permalink(),'carte-des-trails')){  //si l'url contient carte-des-trails ou que nous sommes dans le plugin
+                              wp_register_style( 'carte-interactive-css', plugins_url('carte-interactive/assets/css/map.css'));
+                              wp_enqueue_style('carte-interactive-css');
 
-						
-						wp_register_script( 'lib2', plugins_url('carte-interactive/assets/js/node_modules/jquery/dist/jquery.min.js'),array(), false,false);
-						wp_enqueue_script('lib2');
-							
+                              wp_register_style( 'fontawesome', plugins_url('carte-interactive/assets/css/fontAwesome/css/font-awesome.css'));
+                              wp_enqueue_style('fontawesome');
 
-                        wp_register_script( 'bootstrap-lib-js', plugins_url('carte-interactive/assets/js/node_modules/bootstrap/dist/js/bootstrap.min.js'));
-                        wp_enqueue_script('bootstrap-lib-js'); 
+                              wp_register_script( 'bootstrap-lib-js', plugins_url('carte-interactive/assets/js/node_modules/bootstrap/dist/js/bootstrap.min.js'));
+                              wp_enqueue_script('bootstrap-lib-js'); 
 
-                        wp_register_style( 'bootstrap-lib', plugins_url('carte-interactive/assets/js/node_modules/bootstrap/dist/css/bootstrap.min.css'));
-                        wp_enqueue_style('bootstrap-lib'); 
+                              wp_register_style( 'bootstrap-lib', plugins_url('carte-interactive/assets/js/node_modules/bootstrap/dist/css/bootstrap.min.css'));
+                              wp_enqueue_style('bootstrap-lib'); 
 
-                        wp_register_script( 'bootstrap-bundle', plugins_url('carte-interactive/assets/js/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'));
-                        wp_enqueue_script('bootstrap-bundle'); 
+                              wp_register_script( 'bootstrap-bundle', plugins_url('carte-interactive/assets/js/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'));
+                              wp_enqueue_script('bootstrap-bundle'); 
 
-                        wp_register_script( 'resize-map', plugins_url('carte-interactive/assets/js/image-map-resizer-master/js/imageMapResizer.js'));
-                        wp_enqueue_script('resize-map'); 
+                              wp_register_script( 'resize-map', plugins_url('carte-interactive/assets/js/image-map-resizer-master/js/imageMapResizer.js'));
+                              wp_enqueue_script('resize-map'); 
 
 
-                        wp_register_script( 'coordonnee-js', plugins_url('carte-interactive/assets/js/coordonnee.js'));
-                        wp_enqueue_script('coordonnee-js');  
-                        
-                        wp_register_script( 'modalPlugin-js', plugins_url('carte-interactive/assets/js/modalPlugin.js'));
-                        wp_enqueue_script('modalPlugin-js'); 
+                              wp_register_script( 'coordonnee-js', plugins_url('carte-interactive/assets/js/coordonnee.js'));
+                              wp_enqueue_script('coordonnee-js');  
+                              
+                              wp_register_script( 'modalPlugin-js', plugins_url('carte-interactive/assets/js/modalPlugin.js'));
+                              wp_enqueue_script('modalPlugin-js'); 
 
-                        /* Ajax sur wordpress*/
-                        wp_register_script( 'formAjax-js', plugins_url('carte-interactive/assets/js/formAjax.js'));
-                        wp_enqueue_script('formAjax-js', array('jquery'), '1.0', true );  
+                              /* Ajax sur wordpress*/
+                              wp_register_script( 'formAjax-js', plugins_url('carte-interactive/assets/js/formAjax.js'));
+                              wp_enqueue_script('formAjax-js', array('jquery'), '1.0', true );  
 
-                        wp_localize_script('formAjax-js', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
-					}
+                              wp_localize_script('formAjax-js', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
+                        }
                   }
             }
       }
