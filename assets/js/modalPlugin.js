@@ -1,9 +1,7 @@
 var indexSlide = 0;
 var locationBuffer = null;
 
-$(document).ready(function(){
-
-  
+$(document).ready(function(){ 
       var namespace;
 
       $( ".modalplugin" ).hide();
@@ -11,7 +9,6 @@ $(document).ready(function(){
       namespace = {
 
             showModal : function() {
-                  resetSlide();
                   if($( ".modalplugin" ).css("display") != "flex"){
                         
                         $( ".modalplugin" ).fadeIn( "slow", function() {
@@ -26,7 +23,6 @@ $(document).ready(function(){
                         });
                   }
             }
-
       };
     
     window.ns = namespace;
@@ -54,22 +50,6 @@ $(document).ready(function(){
       });
 
 
-      /**
-       * navigation du slide
-      */
-      $(".navSlide").click(function(){    
-            handleSlide($(this));
-            animationSlide();
-      });
-
-
-      /**
-       * click sur les miniatures
-      */
-      $(".listTrailPicture").delegate("li","click",function(ev) {
-           indexSlide =  $(this).attr("data-id");
-           animationSlide();
-      });
       
 });
 
@@ -89,11 +69,10 @@ function toggleModalMenu(lien){
             $("#ajaxLoader").hide(500,()=>{
                   $(".modalplugin").remove("#ajaxLoader"); 
             }); 
-            if(lien=="liste" && locations.length!=0){
+            if(lien=="liste"){
                   
                   $(".testForm").fadeOut(400,()=>{
                         showPicture();
-                        runSlide();
                         $(".mainSlideTrail").fadeIn(400);
                   });                           
             }else{
@@ -115,15 +94,6 @@ function changeClass(lien){
       }        
 }
 
-/**
- * gestion de l'avancement du slide
-*/
-function handleSlide(element){
-      element.attr("id") == "prev" ?  indexSlide-- :  indexSlide++  ;
-
-      if( indexSlide < 0)  indexSlide=locations.length-1;
-      if( indexSlide >=locations.length)  indexSlide=0;      
-}
 
 
 /**
@@ -147,17 +117,6 @@ function resetSlide(){
 }
 
 
-/**
- * Avancement du slide
-*/
-function runSlide(){
-     
-      showDistance();
-      showDate();
-      showImage();
-     
-}
-
 
 /**
  * Affiche la date
@@ -175,36 +134,29 @@ function showDistance(){
 }
 
 
-/**
- * Affiche l'image du trail
-*/
-function showImage(){
-      let img = clonePicture(locations[indexSlide].picture);
-      img.attr("id",locations[indexSlide].id);
-      let h2 = $("<h2>").text(locations[indexSlide].name);
-
-      $(".infoSlide").empty();
-      $(".infoSlide").append(img).append(h2);
-      if(locationBuffer!=null) $(locationBuffer).css("opacity","0.5");
-
-      let li = $(".listTrailPicture").find("li")[indexSlide];
-      let img_picture =  $(li).find("img");
-      locationBuffer = img_picture;
-      $(img_picture).css("opacity","1");
-}
-
 
 /**
- * Affiche les miniatures
+ * Affiche la list des trails
 */
 function showPicture(){
-      $(".listTrailPicture").empty();
-    
-      for(let key in locations){
-            let img = clonePicture(locations[key].picture);
-            let li =  $("<li data-id='"+key+"'>");
-            $(".listTrailPicture").append(li)
-            li.append(img);
+      $("#list-trail").empty();
+      var i =  1;
+      var className ="";
+  
+      for(let location of locations){
+          
+            var newDataTrail =  $(".data-trail").first().clone();
+            let img = clonePicture(location.picture);
+            if(i%2 != 0 )   newDataTrail.css("backgroundColor","white");
+                 
+           
+            newDataTrail.css("display","block");
+            newDataTrail.find(".img-trail").prepend(img)
+            newDataTrail.find(".name-trail").append(location.name);
+            newDataTrail.find(".date_trail").find("span").append(location.date);
+            newDataTrail.find(".distance_trail").find("span").append(location.distance);
+            $("#list-trail").append(newDataTrail);
+            i++;
       }    
 }
 

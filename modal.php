@@ -31,34 +31,7 @@
                               }                       
                               ?>                           
                         </ul>
-
-                        <span id="country">
-                              <i class="fa fa-map-marker fa-3x" aria-hidden="true"></i>
-                              <span></span>
-                        </span> 
-                         
-                        <div class="info_trail">
-                              <span class="date_trail">
-                                    <i class="fa fa-calendar fa-2x"></i>
-                                    <span></span>
-                              </span> 
-                              
-                              <span class="distance_trail">
-                                    <i class="fa fa-flag fa-2x"></i>
-                                    <span></span>
-                              </span>  
-                              
-                              <?PHP   
-                              if($user->roles[0] =="administrator" && is_admin()){ 
-                              ?> 
-                                    <span class="trash_trail">
-                                          <i class="fa fa-trash fa-2x trash_icon"></i>                
-                                    </span>
-                              <?PHP   
-                              }
-                              ?>
-                        </div>
-                       
+                             
                         <?PHP   
                               ListTrail::createView();
                               Form::createForm();                         

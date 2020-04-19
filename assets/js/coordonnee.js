@@ -1,4 +1,4 @@
-$(document).ready(function(){alert();
+$(document).ready(function(){
       /*
       * resize plugin image map
       */

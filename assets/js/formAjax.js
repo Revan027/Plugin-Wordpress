@@ -10,7 +10,7 @@ $(document).ready(function(){
 
 /**************************************************target**********************************************************************/
 
-      var content =  $("#wpbody-content");
+      var content =  $(".modalplugin");
       var formAdd =  $(".testForm");
       let eleArea =  $('.map').children(".areaMap");
       let eleClose =  $( ".modalplugin" ).find('.close');
@@ -96,19 +96,17 @@ $(document).ready(function(){
                         url:ajaxurl,
                         type: 'GET',
                         data:  {"action":'get_trail_region'},
-  
                         success: function(data) {	
+
                               eachTrail(JSON.parse(data));
                         }
-            }); 
+                  }); 
             }
       }
 
 
       /**************************set a new location for a trail*************************************/
       function setTrail(form){
-           
-
             var formData = new FormData();      //pour passer des fichiers
             formData.append('action','add_trail');     //nom de l'action pour wordpress
             formData.append('name', form.name);
@@ -125,7 +123,7 @@ $(document).ready(function(){
                   processData: false, // Don't process the files
                   contentType: false, // Set content type to false as jQuery will tell the server its a query string request
                   success: function(data) {	
-                       
+
                         animateAlert("success","Ajout effectué"); 
                         get_trail_region();
                         get_trails_by_region(location.region);
@@ -148,8 +146,17 @@ $(document).ready(function(){
                   type: 'GET',
                   data: {"action":'get_trails_by_region',"region":region},      
                   success: function(data) {
-                        locations = JSON.parse(data);
-                        toggleModalMenu("liste");                    
+
+                        var response = JSON.parse(data);
+                        if(!response.code){
+                              locations = response;
+                              //animateAlert("success",null);  
+                           
+                        }else{
+                              animateAlert("warning",response);  
+                        }
+                        toggleModalMenu("liste"); 
+                        console.log(response);             
                   }
             });
       }
@@ -168,6 +175,7 @@ $(document).ready(function(){
                   processData: false, 
                   contentType: false,
                   success: function(data) {
+
                         get_trail_region();
                         get_trails_by_region(region);
                         animateAlert("success","Suppression effectué");                   
@@ -214,11 +222,26 @@ $(document).ready(function(){
       /*
       *animate alert
       */
-      function animateAlert(type,message){
-      
-            content.append('<div class="alert alert-'+type+'" role="alert">'+message+'</div>');
+      function animateAlert(type,response){
+            if(response.code == 1) content.prepend('<div class="alert alert-'+type+'" role="alert"></div>');
+            var libelle = response.ListeErreur;
+            var name = erreur[0].name;
+            var message = "Le champ " + name + libelle;
 
-            $( ".alert" ).animate({
+            content.prepend('<div class="alert alert-'+type+'" role="alert">'+message+'</div>');
+            $( ".alert" ).show(600,()=>{
+
+                  setTimeout(function(){
+                        formAdd.find("button").prop("disabled","");
+                        
+                        $( ".alert" ).hide(600,()=>{
+                              content.find(".alert").remove();
+                        });
+                  },8500);
+               
+            });
+
+            /*$( ".alert" ).animate({
                   opacity:1,
                   bottom: "+=50%"
 
@@ -234,6 +257,6 @@ $(document).ready(function(){
                               content.find(".alert").remove();
                         });  
                   },1500);
-            });
+            });*/
       } 
 });

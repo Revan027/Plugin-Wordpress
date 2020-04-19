@@ -12,9 +12,7 @@ add_action( 'wp_ajax_get_trail_region', 'get_trail_region' );
 add_action( 'wp_ajax_nopriv_get_trail_region', 'get_trail_region' );//pour visiteur
 
 
-
-function add_trail() {
-
+function add_trail() {   
       $valName = $_POST['name'];
       $country = $_POST['country'];
       $region = $_POST['region'];
@@ -23,30 +21,48 @@ function add_trail() {
       $src = $_FILES['image']['name'];
       $temp_name = $_FILES['image']['tmp_name'];
 
+      $validateForm = new ValidateForm();
+      $response = null;
+      $tabData = [
+            ["type"=>"string","value"=>"dfsfd","name"=>"Nom"],
+            ["type"=>"string","value"=>42,"name"=>"Pays"],
+            ["type"=>"string","value"=>"wdsd","name"=>"Région"],
+            ["type"=>"date","value"=>"er","name"=>"Date"],
+            ["type"=>"number","value"=>42,"name"=>"Distance"]
+      ];  
+      $error =  $validateForm->checkForm( $tabData);
+
       new File( $_FILES['image']);
 
-      $location = EntityPlugin::addTrail( $valName,$country,$region ,$distance,$date,$src); 
-      echo json_encode($location); 
-	die();
+      $error == null ? $response = EntityPlugin::addTrail( $valName,$country,$region ,$distance,$date,$src) : $response =  $error;
+
+      echo json_encode($response); 
+      die();    
 }
 
 
 function get_trail_region() {
-
       $location = EntityPlugin::get_trail_region();
-    
+
       echo json_encode($location);  //encodage en JSON du tableau de résultat
 	die();
 }
 
 
-function get_trails_by_region() {
-
+function get_trails_by_region() {   
       $region = $_GET['region'];
- 
-      $location = EntityPlugin::get_trails_by_region($region);
-      echo json_encode($location);  
-	die();
+
+      $validateForm = new ValidateForm();
+      $response = null;
+      $tabData = [
+            ["type"=>"string","value"=> $region,"name"=>"Region"],
+      ];  
+      $error =  $validateForm->checkForm( $tabData);
+
+      $error["Code"] == 1 ? $response = EntityPlugin::get_trails_by_region($region) : $response =  $error;
+    
+      echo json_encode($response);  
+      die();
 }
 
 

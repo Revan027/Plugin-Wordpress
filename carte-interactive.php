@@ -17,6 +17,7 @@ include_once plugin_dir_path( __FILE__ ).'/modal.php';
 include_once plugin_dir_path( __FILE__ ).'/listTrail.php';
 include_once plugin_dir_path( __FILE__ ).'/form.php';
 include_once plugin_dir_path( __FILE__ ).'/file.php';
+include_once plugin_dir_path( __FILE__ ).'/validateForm.php';
 
  
 
@@ -91,7 +92,6 @@ class Carte_interactive
       }
      
 
-
       /**
       * Integration du menu dans la barre d'administration de wordpress
       */
@@ -104,9 +104,7 @@ class Carte_interactive
           
       }
 
-
-
-      
+ 
       /**
       *creation page accueil
       */
@@ -145,15 +143,22 @@ class Carte_interactive
       }   
 
 
+      /**
+      *installation du plugin
+      */
       public function install(){
             EntityPlugin::install();
       }
 
+
+      /**
+      *désinstallation du plugin
+      */
       public function uninstall(){
             EntityPlugin::uninstall();
       }
 
       
 }
-new Carte_interactive();      //instancation la classe d'initialisation du plugin
+new Carte_interactive();      //instanciation la classe d'initialisation du plugin
 ?>
